@@ -1,5 +1,10 @@
 import { useState } from "react";
 
+/**
+ *
+ * @name LoginForm
+ * @description This componente is in charge of render LoginForm
+ */
 export default function LoginForm(props) {
   const [loginVisible, setLoginVisible] = useState(false);
 
