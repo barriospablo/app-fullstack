@@ -4,6 +4,7 @@ export default function LoginForm(props) {
   const [loginVisible, setLoginVisible] = useState(false);
 
   const hideWhenVisible = { display: loginVisible ? "none" : "" };
+
   const showWhenVisible = { display: loginVisible ? "" : "none" };
 
   return (
