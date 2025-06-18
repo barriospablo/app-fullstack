@@ -1,4 +1,4 @@
-import { useState } from "react";
+import Togglable from "./Togglable";
 
 /**
  *
@@ -6,18 +6,9 @@ import { useState } from "react";
  * @description This componente is in charge of render LoginForm
  */
 export default function LoginForm(props) {
-  const [loginVisible, setLoginVisible] = useState(false);
-
-  const hideWhenVisible = { display: loginVisible ? "none" : "" };
-
-  const showWhenVisible = { display: loginVisible ? "" : "none" };
-
   return (
     <div>
-      <div style={hideWhenVisible}>
-        <button onClick={() => setLoginVisible(true)}>Show login</button>
-      </div>
-      <div style={showWhenVisible}>
+      <Togglable buttonLabel={"SHOW LOGIN"}>
         <form onSubmit={props.handleSubmit}>
           <div>
             <input
@@ -40,9 +31,7 @@ export default function LoginForm(props) {
 
           <button>Login</button>
         </form>
-
-        <button onClick={() => setLoginVisible(false)}>Cancel</button>
-      </div>
+      </Togglable>
     </div>
   );
 }
