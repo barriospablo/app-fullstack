@@ -4,11 +4,10 @@ import Notification from "./components/Notification.jsx";
 import noteService from "./services/notes";
 import loginService from "./services/login.js";
 import LoginForm from "./components/LoginForm.jsx";
-import Togglable from "./components/Togglable.jsx";
+import NoteForm from "./components/NoteFomr.jsx";
 
 const App = () => {
   const [notes, setNotes] = useState([]);
-  const [newNote, setNewNote] = useState("");
   const [showAll, setShowAll] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const [username, setUsername] = useState("");
@@ -36,16 +35,9 @@ const App = () => {
     window.localStorage.removeItem("loggedNoteAppUser");
   };
 
-  const addNote = (event) => {
-    event.preventDefault();
-    const noteObject = {
-      content: newNote,
-      important: Math.random() > 0.5,
-    };
-
+  const addNote = (noteObject) => {
     noteService.create(noteObject).then((returnedNote) => {
       setNotes(notes.concat(returnedNote));
-      setNewNote("");
     });
   };
 
@@ -68,10 +60,6 @@ const App = () => {
           setErrorMessage(null);
         }, 5000);
       });
-  };
-
-  const handleNoteChange = (event) => {
-    setNewNote(event.target.value);
   };
 
   const handleSubmit = async (e) => {
@@ -100,7 +88,6 @@ const App = () => {
   return (
     <div>
       <h1>Notes</h1>
-      <Togglable />
       <Notification message={errorMessage} />
       {!user ? (
         <LoginForm
@@ -111,15 +98,7 @@ const App = () => {
           handleSubmit={handleSubmit}
         />
       ) : (
-        <div>
-          <form onSubmit={addNote}>
-            <input value={newNote} onChange={handleNoteChange} />
-            <button type="submit">save</button>
-          </form>
-          <div>
-            <button onClick={handleLogout}>Cerrar sesion</button>
-          </div>
-        </div>
+        <NoteForm addNote={addNote} handleLogout={handleLogout} />
       )}
 
       <div>
