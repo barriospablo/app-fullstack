@@ -1,4 +1,5 @@
 import Togglable from "./Togglable";
+import PropTypes from "prop-types";
 
 /**
  *
@@ -35,3 +36,7 @@ export default function LoginForm(props) {
     </div>
   );
 }
+LoginForm.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  username: PropTypes.string.isRequired,
+};
